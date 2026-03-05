@@ -13,11 +13,13 @@ jobs:
   #this is github runner : every job needs a separate runner
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: say hello to user
-        run: echo "Hello $USER"
+        run: echo "Hello from GitHub Actions!"
 
-  details:
-    runs-on: ubuntu-latest
-    steps:
-      - name: show version of docker and python.
-        run: docker --version && python --version
+  # details:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: show version of docker and python.
+  #       run: docker --version && python --version
