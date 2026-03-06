@@ -6,13 +6,21 @@ on:
 
 jobs:
   python-matrix:
-    name: Python ${{ matrix.python-version }}
+    # name: Python #{{ matrix.python-version }}
+    # runs-on: ubuntu-latest
+
+    name: Ubuntu | Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+
 
     strategy:
       fail-fast: false
       matrix:
         python-version: [ "3.10", "3.11", "3.12" ]
+        exclude:
+          - python-version: "3.10"
+            os: windows-latest
+
 
     steps:
       - name: Checkout repository
@@ -23,8 +31,17 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Print Python version
+
+      - name: Intentionally fail on Python 3.11
+        if: matrix['python-version'] == '3.11'
         run: |
-          python --version
-          which python
-          python -c "import sys; print('Sys version:', sys.version)"
+          echo "Failing on purpose to demonstrate fail-fast=false"
+          exit 1
+          
+      - name: Succeed otherwise
+        if: matrix['python-version'] != '3.11'
+        run: echo "This job succeeds."
+
+
+    
+
