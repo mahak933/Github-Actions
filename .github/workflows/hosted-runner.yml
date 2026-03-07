@@ -1,0 +1,35 @@
+name: Github Hosted Runner Workflow
+
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    ubuntu:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print OS, hostname, and user
+              run: |
+                    echo "Operating System: $RUNNER_OS"
+                    echo "Hostname: $(hostname)"
+                    echo "User: $(whoami)"
+    
+    windows:
+        runs-on: windows-latest
+        steps:
+            - name: Print OS, hostname, and user
+              run: |
+                    echo "Operating System: $RUNNER_OS"
+                    echo "Hostname: $(hostname)"
+                    echo "User: $(whoami)"
+
+
+    mac:
+        runs-on: macos-latest
+        steps:
+            - name: Print OS, hostname, and user
+              run: |
+                    echo "Operating System: $RUNNER_OS"
+                    echo "Hostname: $(hostname)"
+                    echo "User: $(whoami)"                
