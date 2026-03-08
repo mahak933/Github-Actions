@@ -1,0 +1,33 @@
+name: Job Outputs Demo
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+  make-date:
+    name: Make Date
+    runs-on: ubuntu-latest
+
+    # 1) Expose job-level outputs by mapping them from a step
+    outputs:
+      today: ${{ steps.get_date.outputs.today }}
+
+    steps:
+      - name: Compute today's date (UTC)
+        id: get_date
+        run: |
+          # Produce an ISO-like date string, e.g. 2026-03-05 (UTC)
+          echo "today=$(date -u +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+  use-date:
+    name: Use Date
+    runs-on: ubuntu-latest
+
+    # 2) Make this job depend on the first job
+    needs: [ make-date ]
+
+    steps:
+      - name: Print the date received from make-date
+        run: |
+          echo "Today's date from previous job: ${{ needs.make-date.outputs.today }}"
