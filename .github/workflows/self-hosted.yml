@@ -1,9 +1,10 @@
 name: Self-hosted Runner Workflow
 
 on:
-    push:
-        branches:
-            - main
+    workflow_dispatch: # this allows us to trigger the workflow manually from github UI
+    # push:
+    #     branches:
+    #         - main
 
 jobs:
     Self-Hosted-Runner:
