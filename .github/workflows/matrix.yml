@@ -1,8 +1,9 @@
 name: Matrix Python Versions
 
 on:
-  push:
-  pull_request:
+  workflow_dispatch: # this allows us to trigger the workflow manually from github UI
+  # push:
+  # pull_request:
 
 jobs:
   python-matrix:

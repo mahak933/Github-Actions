@@ -1,7 +1,7 @@
 name: Version Check Workflow
 
 on:
-    push:
+    workflow_dispatch: # this allows us to trigger the workflow manually from github UI
 
 jobs:
     tools:
