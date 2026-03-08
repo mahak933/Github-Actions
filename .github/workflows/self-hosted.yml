@@ -1,0 +1,21 @@
+name: Self-hosted Runner Workflow
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    Self-Hosted-Runner:
+       runs-on: self-hosted
+       steps:
+            - name: Print the hostname of the machine
+              run: hostname
+
+            - name: Print the working directory
+              run : pwd
+
+            - name: Create a file and verify it exists on your machine after the run
+              run: |
+                    touch self-hosted-runner-file.txt
+                    ls -la self-hosted-runner-file.txt
