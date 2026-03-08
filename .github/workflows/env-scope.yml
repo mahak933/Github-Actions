@@ -1,0 +1,27 @@
+name: Env Scope Demo
+
+on:
+  workflow_dispatch:
+
+# 1) Workflow-level env (available to all jobs & steps unless overridden)
+env:
+  APP_NAME: myapp
+
+jobs:
+  show-envs:
+    name: Show ENV scope
+    runs-on: ubuntu-latest
+
+    # 2) Job-level env (available to all steps in this job; can override workflow-level)
+    env:
+      ENVIRONMENT: staging
+
+    steps:
+      - name: Print all three envs in one step
+        # 3) Step-level env (available only to this step; can override job/workflow values)
+        env:
+          VERSION: 1.0.0
+        run: |
+          echo "APP_NAME (workflow-level): $APP_NAME"
+          echo "ENVIRONMENT (job-level): $ENVIRONMENT"
+          echo "VERSION (step-level): $VERSION"
