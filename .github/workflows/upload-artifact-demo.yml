@@ -1,0 +1,33 @@
+name: Upload Artifacts Demo
+
+on:
+   workflow_dispatch:  # Run it manually from the Actions tab
+   # push:
+   # pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 1) Generate a file (e.g., test report or logs)
+      - name: Generate test report
+        run: |
+          mkdir -p reports
+          echo "Test Report" > reports/report.txt
+          echo "Status: PASS" >> reports/report.txt
+          date >> reports/report.txt
+          echo "Generated at runtime." >> reports/report.txt
+          ls -la reports
+
+      # 2) Upload the artifact
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report            # how it appears in the Actions UI
+          path: reports/report.txt     # file or folder to upload
+          if-no-files-found: error     # fail fast if path is wrong
+          retention-days: 14           # optional: how long GitHub keeps it
