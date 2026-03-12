@@ -7,3 +7,4 @@ echo "Running shell checks..."
 [ -f README.md ] && echo "Found README.md"
 # If something goes wrong, exit non-zero:
 # exit 
+exit 2
