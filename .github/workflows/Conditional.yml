@@ -1,8 +1,7 @@
 name: Combined Workflow Demo
 
 on:
-  push:
-  pull_request:
+
   workflow_dispatch:
 
 jobs:
@@ -13,19 +12,19 @@ jobs:
 
 
 # 1) Step that only runs on main branch
-    #   - name: Run only on main
-    #     if: github.ref == 'refs/heads/main'
-    #     run: echo "This runs only on main branch"
+      - name: Run only on main
+        if: github.ref == 'refs/heads/main'
+        run: echo "This runs only on main branch"
 
 
-    #   - name: Step that may fail
-    #     id: risky
-    #     run: exit 1
+      - name: Step that may fail
+        id: risky
+        run: exit 1
 
-    #   # 2) Step that runs only if previous FAILED
-    #   - name: Run only if previous failed
-    #     if: failure()   # or steps.risky.outcome == 'failure'
-    #     run: echo "Previous step failed!"
+      # 2) Step that runs only if previous FAILED
+      - name: Run only if previous failed
+        if: failure()   # or steps.risky.outcome == 'failure'
+        run: echo "Previous step failed!"
 
     
   # 3) Job that runs only on push events (NOT on pull requests)
