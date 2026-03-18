@@ -2,8 +2,8 @@ name: Smart Pipeline
 
 on:
     workflow_dispatch:
-#   push:     # 1. Trigger on push to any branch
-#     branches: ["*"]
+    push:     # 1. Trigger on push to any branch
+      branches: ["*"]
 
 jobs:
 
@@ -40,4 +40,4 @@ jobs:
       - name: Print commit message
         run: |
           echo "Commit message:"
-          echo "${{ github.event.head_commit.message }}"
+          echo "${{ github.event.head_commit.message || 'No commit message available' }}"
