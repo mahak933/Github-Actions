@@ -35,10 +35,10 @@ jobs:
 #       - run: echo "This runs only on push events, not PRs"
 
 
-      # 4) Step with continue-on-error: true
-      - name: Risky step that may fail
-        id: risky
-        continue-on-error: true
-        run: |
-          echo "This step might fail but job continues"
-          exit 1
+      # # 4) Step with continue-on-error: true
+      # - name: Risky step that may fail
+      #   id: risky
+      #   continue-on-error: true
+      #   run: |
+      #     echo "This step might fail but job continues"
+      #     exit 1
