@@ -1,8 +1,9 @@
 name: Smart Pipeline
 
 on:
-  push:     # 1. Trigger on push to any branch
-    branches: ["*"]
+    workflow_dispatch:
+#   push:     # 1. Trigger on push to any branch
+#     branches: ["*"]
 
 jobs:
 
