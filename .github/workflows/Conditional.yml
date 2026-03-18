@@ -13,9 +13,9 @@ jobs:
 
 
 # 1) Step that only runs on main branch
-      - name: Run only on main
-        if: github.ref == 'refs/heads/main'
-        run: echo "This runs only on main branch"
+    #   - name: Run only on main
+    #     if: github.ref == 'refs/heads/main'
+    #     run: echo "This runs only on main branch"
 
 
     #   - name: Step that may fail
@@ -29,19 +29,17 @@ jobs:
 
     
   # 3) Job that runs only on push events (NOT on pull requests)
-  push-only-job:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "This runs only on push events, not PRs"
+#   push-only-job:
+#     if: github.event_name == 'push'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "This runs only on push events, not PRs"
 
 
-
-
-    #   # 4) Step with continue-on-error: true
-    #   - name: Risky step that may fail
-    #     id: risky
-    #     continue-on-error: true
-    #     run: |
-    #       echo "This step might fail but job continues"
-    #       exit 1
+      # 4) Step with continue-on-error: true
+      - name: Risky step that may fail
+        id: risky
+        continue-on-error: true
+        run: |
+          echo "This step might fail but job continues"
+          exit 1
