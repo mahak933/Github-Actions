@@ -16,13 +16,11 @@ jobs:
         uses: actions/cache@v4
         id: cache
         with:
-          path: |
-            /var/cache/apt
-            /var/lib/apt/lists
-            ~/.cache
-          key: ${{ runner.os }}-apt-${{ hashFiles('Scripts/run.sh') }}
+          path: ~/.cache
+          key: ${{ runner.os }}-${{ hashFiles('Scripts/run.sh') }}
           restore-keys: |
-            ${{ runner.os }}-apt-
+            ${{ runner.os }}-
+
 
       # 2. Make script executable
       - name: Ensure script is executable
