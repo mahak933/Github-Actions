@@ -11,15 +11,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+        
+      - name: Prepare cache folder
+        run: mkdir -p ~/.cache/custom
+
       # 1. Cache apt packages and other downloads
-      - name: Cache system dependencies
+
+      - name: Cache script downloads
         uses: actions/cache@v4
-        id: cache
         with:
-          path: ~/.cache
-          key: ${{ runner.os }}-${{ hashFiles('Scripts/run.sh') }}
-          restore-keys: |
-            ${{ runner.os }}-
+            path: ~/.cache/custom
+            key: ${{ runner.os }}-${{ hashFiles('Scripts/run.sh') }}
+            restore-keys: |
+                ${{ runner.os }}-
+
 
 
       # 2. Make script executable
