@@ -1,20 +1,33 @@
-name: Run Shell Script
+name: Run Shell Script With Cache
 
 on:
   workflow_dispatch:
-#   push:
-#     branches: ["**"]
-#   pull_request:
-#     branches: ["**"]
 
 jobs:
   test-shell:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Cache apt packages and other downloads
+      - name: Cache system dependencies
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            /var/cache/apt
+            /var/lib/apt/lists
+            ~/.cache
+          key: ${{ runner.os }}-apt-${{ hashFiles('Scripts/run.sh') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
+      # 2. Make script executable
       - name: Ensure script is executable
         run: chmod +x Scripts/run.sh
 
+      # 3. Run your shell script
       - name: Run script (non-zero exit -> fail job)
         run: ./Scripts/run.sh
